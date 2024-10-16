@@ -1,0 +1,17 @@
+version: '3'
+services:
+  my-python-app:
+    build: .
+    container_name: my-python-app-container
+    volumes:
+      - ./logs:/app/logs  # Montar el directorio de logs para persistirlos fuera del contenedor
+      - ./data:/app/data  # Montar el directorio 'data' para guardar los archivos JSON
+    environment:
+      - DB_HOST=terraform-20241015011115662100000001.cjia444qy3ck.us-east-1.rds.amazonaws.com
+      - DB_USER=root
+      - DB_PASSWORD=correct_password
+      - DB_NAME=mydatabase
+    command: python menu.py
+    tty: true  # Permitir la entrada interactiva
+    stdin_open: true  # Mantener la entrada estándar abierta para que el contenedor acepte entrada
+
